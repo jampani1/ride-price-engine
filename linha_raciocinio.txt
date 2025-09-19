@@ -1,0 +1,120 @@
+=============       thinking eda.py
+hora
+dia (comeco ou fim de mes? - melhoria)
+mes (comemorativo?)
+source/destination - trajeto/localidades
+cab_type - mais caro ou mais barato
+
+price
+distante
+surge_multiplier ? multiplicador?
+
+temperatura
+aparrenttemperature - precisa de ar condicionado?
+precipProbability - meu Deus
+
+55095 precos faltantes?
+
+de basic stats nao consegui tirar nada
+
+Engenharia de Features
+tratar tempo real das corridas como 
+dia (comeco ou final de mes?)
+mes (comemorativo?)
+hora (ao amanhecer ou ao anoitecer?)
+especificacoes de 
+timestamp (dado bruto)
+
+55.059 precos faltandos de um conjunto de 693.071 corridas
+precisa filtrar mas bom para testar os modelos depois
+
+=============       thinking correlation_view.py 
+tipo original da coluna price ja é float, nao precisa mudar?
+t: nao, melhor prezar pelo cenario ideal, programacao defensiva (melhor garantir)
+
+conversao para tipo numerico ajuda no truque para transformar em NaN ?
+t: sim, e possibilita .isnull.sum() e .dropna() de uma vez só nos dados NaN
+
+em .describe(), o que cada item significa mais diretamente?
+count    637976.000000      - 637.976 corridas validas
+mean         16.545125      - preço medio eh de $16.5
+std           9.324359      - quao espalhados os dados estao (nesse caso, 9 dolares)
+min           2.500000      - a corrida mais barata
+25%           9.000000      - 25% custaram até $9
+50%          13.500000      - mediana, metade das corridas custaram menos que $13.5
+75%          22.500000      - 75% custou até $22.5
+max          97.500000      - mais cara
+
+=============       thinking imgs
+distancia_preco eh scatterplot ou de dispersao
+
+distancia em milhas? jura isso?
+para converter tem que lembrar de
+1 milha = 1.6 km
+o mesmo para temperatura (feature futura)
+
+variacao baixissima
+pelo contrario, estava vendo errado no grafico
+pensar em uma corrida de 2 milhas teve de menos de 10 dolares e mais de 60
+
+tiposervico nao entendi o grafico
+grafico de boxplot
+circulos sao outliers (provenientes de surge_multiplier por exemplo)
+
+a partir daqui, incremento de mais features para entender a variação
+ate aqui:
+considerar distancia e tipo de servico
+
+=============       thinking new feature 
+transformar datastamp comentado acima
+
+=============       thinking imgs
+hora_preco.png 
+as 8 e as 17 eh muito mais caro
+enquanto 12 eh muito barato (meio dia ou meia noite?)
+rush hours 8 e 17
+
+dia_preco.png
+variacao de 10 centavos de segunda e sexta para outros dias? de sexta para sabado encarece? madrugada > sair de casa e voltar
+uma ideia: de dia de semana, corridas sao para trabalho *entao* mais curtas (?) *entao* mais baratas
+
+=============       thinking new feature 
+one-hot encoding para tipo de serviço (cab_type e name)
+cab_type = uber ou Lyft
+name = tipos de servico
+
+função do pandas pd.get_dummies()
+criar novas colunas  == Shared, UberPool, Lyft, UberX, WAV, Lyft XL, UberXL, Lux, Black, Lux Black, Black SUV, Lux Black XL
+    se for Shared
+    1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0 
+
+e Uber, Lyft
+    se for Uber 1, se for Lyft 0
+
+=============        thinking feature selection
+seleção de features para nao fazer com que o modelo demore mil anos para rodar pela quantidade de dados (600k linhas)
+
+=============       thinking view modelos
+sobre a comparação entre os modelos
+
+--- TABELA DE COMPARAÇÃO DE PERFORMANCE ---
+Modelo  MAE (Erro Médio $)  R² Score
+0   Regressão Linear            1.776938  0.927394
+1      Random Forest            1.268922  0.956703
+2  Gradient Boosting            1.285891  0.959187
+
+Regressão linear: tenta encontrar a melhor linha reta possivel que descreve a relacao entre as features
+
+Random Forest Regressor: cria centenas de árvores de decisão. a decisão final é a média de todas as árvores (nessa comparacao, errou por menos dolares)
+
+Gradient Boosting Regressor: random forest evoluido +-
+cria um "especialista" que ve os dados, depois analisa os erros desse especialista e treina um segundo focado em corrigir tais erros. o terceiro corrige os erros do segundo e assim em diante
+(nessa comparacao conseguiu o maior R^2, explicando melhor o porquê dos preços variarem)
+
+=============       thinking escolhendo modelo ideal
+MAE é uma metrica mais facil de comunicar para a area de negócios
+
+=============       thinking predict.py
+df_alinhado = df_final.reindex(columns=colunas_do_modelo, fill_value=0)
+
+linha importante para a comparação - garante mesmas colunas entre o dataset e o modelo

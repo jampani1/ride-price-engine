@@ -1,0 +1,20 @@
+# Ignorar arquivos de dados e modelos
+*.pkl
+*.joblib
+*.csv
+
+# Manter pastas vazias com .gitkeep, mas ignorar o resto
+data_source/*
+!data_source/.gitkeep
+
+data_processed/*
+!data_processed/.gitkeep
+
+final_model/*
+!final_model/.gitkeep
+
+# Python e outros
+__pycache__/
+.venv/
+venv/
+.vscode/

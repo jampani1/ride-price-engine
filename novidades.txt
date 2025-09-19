@@ -1,0 +1,39 @@
+pontos novos e interessantes: puxar do kaggle direto com API 
+
+executar o download uma vez so e depois so carregar o salvo localmente- readme
+
+criacao de graficos ficarao comentados
+comentar td junto ctrl k + ctrl c
+
+tecnica de one-hot encoding para converter palavras em números
+biblioteca pandas 
+pd.get_dummies()
+
+mesmo com alguns registros sem preços (55k +-)
+ainda assim dividimos os df com features etc em teste e treino
+
+
+entendendo MAE e R^2
+
+MAE Mean Absolute Error
+significa a media de todos os erros
+MAE de X dolares significa que na media as previsões erram X dolares para mais ou para menos
+        quanto menor melhor
+
+R^2 coeficiente de determinação
+que porcentagem da variação no preço o modelo consegue explicar?
+mede o "poder explicativo" 
+quanto mais perto de 1 (ou 100%) melhor
+
+
+diferenças entre Classificação e Regressão
+
+classificacao (projeto das reviews)
+trabalho de classificacao (literalmente), peghava uma review e CLASSIFICAVA em positiva ou negativa com base em outros dados
+
+regressao (projeto preço ubers)
+trabalho de prever um valor contínuo dentro de uma escala (features)
+"considerando a distância, hora e tipo do carro, qual é o valor exato da corrida?"
+
+
+considerar linha de pensamento em aaaab.txt
