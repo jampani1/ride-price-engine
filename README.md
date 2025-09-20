@@ -96,9 +96,10 @@ Este projeto estabelece uma base sólida para a previsão de preços, mas pode s
 
 - **Testar Modelos Avançados:** Experimentar com algoritmos de Gradient Boosting mais modernos e eficientes, como `XGBoost` ou `LightGBM`, que são frequentemente usados em competições de ciência de dados.
 
+
 ### 👨‍💻 Desenvolvido por
 
-Este projeto foi desenvolvido por mim, **Maurício J Souza**, como uma demonstração de habilidades em ciência de dados e machine learning.
+Este projeto foi desenvolvido por mim, **Maurício J Souza**, como parte aprendizagem teórica e prática de ciência de dados e machine learning.
 
 Para considerações, perguntas ou oportunidades, sinta-se à vontade para me encontrar em:
 
