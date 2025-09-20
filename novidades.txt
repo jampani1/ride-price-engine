@@ -36,4 +36,4 @@ trabalho de prever um valor contínuo dentro de uma escala (features)
 "considerando a distância, hora e tipo do carro, qual é o valor exato da corrida?"
 
 
-considerar linha de pensamento em aaaab.txt
+considerar pensamentos em linha_raciocinio.txt
