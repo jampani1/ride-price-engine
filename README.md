@@ -39,7 +39,7 @@ As métricas de avaliação utilizadas foram:
 
 ## 📈 Resultados e Análise
 
-### Performance do Modelo Vencedor
+### Performance dos Modelos
 A análise comparativa mostrou a clara superioridade dos modelos baseados em árvores.
 
 | Modelo | MAE (Erro Médio $) | R² Score |
